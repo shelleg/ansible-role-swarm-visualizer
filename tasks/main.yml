@@ -1,0 +1,17 @@
+---
+# tasks file for ansible-role-docker-registrator
+
+- fail: "msg=\"This role requires shelleg context - read more at http:// url to docs\""
+  when: "shelleg is undefined or shelleg_hosts is undefined"
+
+- include: docker-reqs.yml
+
+- name: "launch visualizer container"
+  docker_container:
+    name: "{{ visualizer_container_name }}"
+    image: "{{ visualizer_container_image }}"
+    state: started
+    restart_policy: always
+    restart: yes
+    published_ports: "{{ visualizer_ports }}"
+    volumes: "{{ visualizer_volumes }}"

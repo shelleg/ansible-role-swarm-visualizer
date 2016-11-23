@@ -4,13 +4,14 @@
   with_items:
     - docker-engine
     - python-pip
-  tags:
-    - apt
+
+- name: "Upgrade pip"
+  pip:
+    name: pip
+    extra_args: "--upgrade"
 
 - name: "Install docker-py"
   pip:
     name: docker-py
     state: present
-    version: 1.7.0
-  tags:
-    - pip
+    version: "{{ docker_py_version }}"
